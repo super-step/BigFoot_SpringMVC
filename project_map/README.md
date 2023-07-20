@@ -3,16 +3,17 @@
 ### pom.xml 파일 설정
 2. lombok
 3. logback 2. slf4j
-4. mybatis
+
 5. spring jdbc
-6. dbcp2
-7. mybatis
-8. mybatis-spring
 10. mysql-connector / j
+6. dbcp2
+
+8. mybatis
+9. mybatis-spring
+
 
 
 4. jackson
-
 11. commons-fileupload
 
 
