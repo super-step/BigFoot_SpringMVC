@@ -1,19 +1,24 @@
 # 프로젝트 시작
 ## 프로젝트 초기 설정
 ### pom.xml 파일 설정
-1. 
-2. slf4j
 2. lombok
-3. logback
-4. jackson
+3. logback 2. slf4j
 4. mybatis
 5. spring jdbc
 6. dbcp2
 7. mybatis
 8. mybatis-spring
-9. ojdbc8
 10. mysql-connector / j
+
+
+4. jackson
+
 11. commons-fileupload
+
+
+
+9. ojdbc8
+
 
 ### web.xml 설정
 1. 한글깨짐 필터설정
