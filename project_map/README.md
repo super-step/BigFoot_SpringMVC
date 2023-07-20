@@ -16,7 +16,8 @@
 4. jackson
 11. commons-fileupload
 
-
+10. thymeleaf-spring5
+11. thymeleaf-layout-dialect 
 
 9. ojdbc8
 
