@@ -8,7 +8,7 @@
     <article class="main_first_section">
       <div class="main_intro">여행 발자국 웹 페이지 입니다.</div>
       <div class="main_to_map">
-        <img th:src="@{/static/image/icon/down-arrow.png}" alt="" />
+        <img th:src="@{/static/image/down-arrow.png}" alt="" />
       </div>
     </article>
     <article class="main_map_container">
@@ -17,31 +17,63 @@
           <div class="map_whole_img main_item">
             <div class="map_container">
               <img
-                src="@{/static/image/map/전국지도.png}"
+                th:src="@{/static/image/map/전국지도.png}"
                 class="whole_map_img"
                 usemap="#image-map"
               />
-              <img src="@{/static/image/map/전라남도.png}" alt="" id="map_jn" />
-              <img src="@{/static/image/map/광주.png}" alt="" id="map_gj" />
+              <img
+                th:src="@{/static/image/map/전라남도.png}"
+                alt=""
+                id="map_jn"
+              />
+              <img th:src="@{/static/image/map/광주.png}" alt="" id="map_gj" />
               <img
                 src="@{${rootPath}/static/image/map/전라북도.png}"
                 alt=""
                 id="map_jb"
               />
-              <img src="@{/static/image/map/충청남도.png}" alt="" id="map_cn" />
-              <img src="@{/static/image/map/대전.png}" alt="" id="map_dj" />
-              <img src="@{/static/image/map/세종.png}" alt="" id="map_sj" />
-              <img src="@{/static/image/map/충청북도.png}" alt="" id="map_cb" />
-              <img src="@{/static/image/map/경상남도.png}" alt="" id="map_gn" />
-              <img src="@{/static/image/map/부산.png}" alt="" id="map_bs" />
-              <img src="@{/static/image/map/대구.png}" alt="" id="map_dg" />
-              <img src="@{/static/image/map/경상북도.png}" alt="" id="map_gb" />
-              <img src="@{/static/image/map/울산.png}" alt="" id="map_us" />
-              <img src="@{/static/image/map/경기도.PNG}" alt="" id="map_gg" />
-              <img src="@{/static/image/map/서울.png}" alt="" id="map_su" />
-              <img src="@{/static/image/map/인천.png}" alt="" id="map_ic" />
-              <img src="@{/static/image/map/강원도.png}" alt="" id="map_go" />
-              <img src="@{/static/image/map/제주도.png}" alt="" id="map_jj" />
+              <img
+                th:src="@{/static/image/map/충청남도.png}"
+                alt=""
+                id="map_cn"
+              />
+              <img th:src="@{/static/image/map/대전.png}" alt="" id="map_dj" />
+              <img th:src="@{/static/image/map/세종.png}" alt="" id="map_sj" />
+              <img
+                th:src="@{/static/image/map/충청북도.png}"
+                alt=""
+                id="map_cb"
+              />
+              <img
+                th:src="@{/static/image/map/경상남도.png}"
+                alt=""
+                id="map_gn"
+              />
+              <img th:src="@{/static/image/map/부산.png}" alt="" id="map_bs" />
+              <img th:src="@{/static/image/map/대구.png}" alt="" id="map_dg" />
+              <img
+                th:src="@{/static/image/map/경상북도.png}"
+                alt=""
+                id="map_gb"
+              />
+              <img th:src="@{/static/image/map/울산.png}" alt="" id="map_us" />
+              <img
+                th:src="@{/static/image/map/경기도.PNG}"
+                alt=""
+                id="map_gg"
+              />
+              <img th:src="@{/static/image/map/서울.png}" alt="" id="map_su" />
+              <img th:src="@{/static/image/map/인천.png}" alt="" id="map_ic" />
+              <img
+                th:src="@{/static/image/map/강원도.png}"
+                alt=""
+                id="map_go"
+              />
+              <img
+                th:src="@{/static/image/map/제주도.png}"
+                alt=""
+                id="map_jj"
+              />
             </div>
           </div>
         </div>
