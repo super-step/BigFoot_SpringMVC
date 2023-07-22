@@ -1,0 +1,30 @@
+@charset "UTF-8";
+body::before {
+  filter: blur(5px);
+}
+article#detail_container {
+  background-color: #ffffff6c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div#detail_img_container {
+}
+div.detail_img_box {
+  position: relative;
+  height: 720px;
+}
+div.detail_img_box img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 720px;
+  z-index: 0;
+}
+div.detail_img_box img[usemap] {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: 0.2s;
+}

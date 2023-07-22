@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html
+  lang="ko"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{/home}"
+>
+  <header th:fragment="header">
+    <div class="main_logo">
+      <img th:src="@{/static/image/footprint/발자국_simple.png}" alt="" />
+    </div>
+    <div class="main_nav main_nav_open">
+      <ul>
+        <li class="home">HOME</li>
+        <li class="developer">개발자 소개</li>
+        <li class="mypage">마이페이지</li>
+        <li class="login">로그인</li>
+        <li class="logout">로그아웃</li>
+      </ul>
+    </div>
+    <div class="main_ham">
+      <input type="checkbox" id="main_ham_trigger" />
+      <label for="main_ham_trigger">
+        <span></span> <span></span> <span></span>
+      </label>
+    </div>
+  </header>
+  <footer th:fragment="footer">
+    <p>CopyRight &copy; dbsdudsw@icloud.com</p>
+  </footer>
+</html>

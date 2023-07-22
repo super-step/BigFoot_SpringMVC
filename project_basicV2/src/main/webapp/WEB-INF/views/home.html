@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나의 홈페이지</title>
+    <link th:href="@{/static/css/home.css}" rel="stylesheet" />
+    <script th:inline="javascript">
+      var rootPath = /*[[@{/}]]*/
+    </script>
+    <script th:src="@{/static/js/home.js}"></script>
+    <script th:src="@{/static/js/main_nav.js}"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header th:replace="~{include :: header}" />
+    <section class="main" layout:fragment="content"></section>
+    <footer th:replace="~{include :: footer}" />
+  </body>
+</html>
