@@ -10,9 +10,10 @@
 	</ul>
 </article>
 <article class="API_map_box" >
-	<div class="API_map" data-name="${SUBDIST.sdis_name}" data-lati = "${SUBDIST.sdis_lati}" data-longi="${SUBDIST.sdis_longi}" data-level="${SUBDIST.sdis_zoomlv }" ></div>
+	<div class="API_map" data-name="${SUBDIST.sdis_code}" data-lati = "${SUBDIST.sdis_lati}" data-longi="${SUBDIST.sdis_longi}" data-level="${SUBDIST.sdis_zoomlv }" ></div>
 	<div class="side_right"></div>
 </article>
+
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=37962b2a8c893984a4d2139de5dc0061"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e65ad8b3e6d91854443cc479cdd2bdc4"></script>
 <script src="${rootPath}/static/js/map/API_map.js?0004"></script>

@@ -76,6 +76,5 @@
 				shape="poly">
 			<area target="" alt="" title="" href="" coords="" shape="0">
 		</map>
-
 	</div>
 </article>

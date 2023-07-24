@@ -18,11 +18,15 @@ let map = new kakao.maps.Map(container, mapOption);
 /***************************************
   마커 관련 부분 시작 
 */
-fetch(`${rootPath}/mark_list?name=${container.dataset.name}`) // 요청
-  .then((response) => response.json()) // 응답한 데이터 중 JSON 만 추출
-  .then((result) => {
-    console.log(result);
-  });
+// fetch(`${rootPath}/mark_list?name=${container.dataset.name}`) // 요청
+//   .then((response) => response.json()) // 응답한 데이터 중 JSON 만 추출
+//   .then((result) => {
+//     console.log(result);
+//   });
+fetch(`${rootPath}/mark_list?name=${container.dataset.name}`)
+  .then((response) => response.json()) // response.json()은 응답 데이터를 JSON 개체로 변환하는 작업
+  .then((json) => console.log(json));
+
 // // 마커 좌표 데이터 로드
 // let positions;
 
@@ -32,11 +36,11 @@ fetch(`${rootPath}/mark_list?name=${container.dataset.name}`) // 요청
 //   positions = JSON.parse(JSON.stringify(TestFile)).Yeosu;
 // }
 // console.log(positions);
-// // 마커 이미지의 이미지 주소입니다
-// var imageSrc =
-//   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+// 마커 이미지의 이미지 주소입니다
+var imageSrc =
+  "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
-// let makers = []; // 마커 리스트
+let makers = []; // 마커 리스트
 // let customOverlays = []; // 커스텀 오버레이 리스트
 // for (var i = 0; i < positions.length; i++) {
 //   if (paramType == "0") {
