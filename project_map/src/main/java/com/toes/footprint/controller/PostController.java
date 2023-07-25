@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PostController {
 	
 	
+	
 	// 마커를 선택하면 게시글 리스트 보여주기
 	// "/postlist/{마커번호}"
 	// public List<PostDto> selectPostList(long mk_seq)
