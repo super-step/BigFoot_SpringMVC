@@ -15,5 +15,5 @@
 </article>
 
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e65ad8b3e6d91854443cc479cdd2bdc4"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=37962b2a8c893984a4d2139de5dc0061"></script>
 <script src="${rootPath}/static/js/map/API_map.js?0004"></script>

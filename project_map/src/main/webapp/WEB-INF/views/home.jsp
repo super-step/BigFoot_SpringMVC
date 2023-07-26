@@ -26,7 +26,7 @@
 <script src="${rootPath}/static/js/home.js?${version}"></script>
 <script src="${rootPath}/static/js/map/main_map.js?${version}"></script>
 <script src="${rootPath}/static/js/map/API_main.js?${version}"></script>
-
+<script src="${rootPath}/static/js/map/detail_map.js?${version}"></script>
 
 </head>
 <body>
@@ -61,6 +61,5 @@
 	<footer>
 		<p>CopyRight &copy; dbsdudsw@icloud.com</p>
 	</footer>
-
 </body>
 </html>

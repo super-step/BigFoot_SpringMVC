@@ -58,7 +58,7 @@ sp_seq	BIGINT	AUTO_INCREMENT	PRIMARY KEY,
 sp_title	VARCHAR(30)	NOT NULL,	
 sp_content	VARCHAR(400)	NOT NULL,	
 sp_cdate	VARCHAR(10)	NOT NULL,	
-sp_mdate	VARCHAR(10)	NOT NULL,	
+sp_mdate	VARCHAR(10),
 sp_mkseq	BIGINT,		
 sp_mbseq	BIGINT		
 );
