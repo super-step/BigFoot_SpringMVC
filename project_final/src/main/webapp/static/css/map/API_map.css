@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
+
+.marker {
+  color: #007996;
+  position: relative;
+  bottom: 35px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #ddd;
+  float: left;
+}
+
+.marker .title {
+  font-family: "Gowun Batang", serif;
+  display: block;
+  text-align: center;
+  background: #fff;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.right_list > .sns_box {
+  border: 1px solid #007996;
+  height: 240px;
+  width: 47%;
+  margin: 5px 5px;
+
+  border-radius: 14px;
+  overflow: hidden;
+}
+.right_list > .sns_box > .sns_img {
+  width: 100%;
+}
+.right_list > .sns_box > .sns_img > .img {
+  width: 186px;
+  height: 200px;
+}

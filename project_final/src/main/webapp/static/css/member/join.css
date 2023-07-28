@@ -1,0 +1,102 @@
+@charset "UTF-8";
+/* div {
+  border: 1px solid blue;
+} */
+/* 최상위 컨테이너 */
+#join_container {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  height: 700px;
+  padding: 20px;
+  text-align: center;
+  margin: 30px auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, 0.2);
+}
+#join_container #join_box {
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+/* 로그인 타이틀 */
+#join_box #join_title {
+  margin: 15px auto;
+  padding: 5px 20px;
+  border-top: 5px solid #7ac2e5;
+  border-bottom: 5px solid #7ac2e5;
+}
+#join_title h2 {
+  margin: 0 auto;
+  text-align: center;
+  font-size: xx-large;
+  font-weight: 600; /* 폰트굵기 */
+}
+#join_box h2:last-of-type {
+  height: 50px;
+}
+/* login_body */
+#join_box #join_body {
+  overflow: scroll;
+  flex: 9;
+}
+#join_body .join_rowbox {
+  display: flex;
+}
+
+/* 회원가입 인풋박스들 */
+#join_body input {
+  border: 2px solid gray;
+  background: none;
+  display: block;
+  width: 300px;
+  border-radius: 25px;
+  margin: 10px auto;
+  padding: 5px 10px;
+  /* input box 에 focus 가 있을때 나타나는 기본 outline 제거 */
+  outline: none;
+  transition: 0.2s;
+}
+
+/* 중복확인 채크 버튼 */
+#join_body .check_button {
+  border: 2px solid red;
+  color: red;
+  margin: 10px auto;
+  padding: 10px 10px;
+  border-radius: 8px;
+  outline: none;
+  /* cursor: pointer; */
+  background: none;
+  width: 100px;
+  transition: all 0.5s ease;
+}
+/* #join_body .check_button:hover {
+    border-radius: 20px;
+  } */
+#join_body .check_passed {
+  border: 2px solid #3498db;
+  background-color: #cfecff;
+  color: #3498db;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+/* 회원가입 버튼 */
+#join_body #join_button {
+  border: 2px solid #3498db;
+  margin: 20px auto;
+  padding: 14px 10px;
+  border-radius: 25px;
+  display: block;
+  outline: none;
+  cursor: pointer;
+  background: none;
+  width: 200px;
+  transition: all 0.5s ease;
+}
+#join_body #join_button:hover {
+  background-color: #3498db;
+}

@@ -1,0 +1,184 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Gowun Batang", serif;
+  font-size: 18px;
+}
+html {
+  width: 100vw;
+  height: 100vh;
+}
+body {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+body::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: url("../image/image/bicycle-gf58dde6d0_1280.jpg") no-repeat center
+    fixed;
+  background-attachment: fixed;
+  background-size: cover;
+  opacity: 1;
+  z-index: -1;
+}
+a {
+  text-decoration: none;
+  color: #222;
+}
+
+header {
+  display: flex;
+  height: 8%;
+  /* border: 1px solid #000; */
+}
+/* 로고 */
+div.main_logo {
+  flex: 1;
+  /* border: 1px solid red; */
+  height: 100%;
+}
+div.main_logo img {
+  padding: 10px 20px;
+  height: 100%;
+}
+div.main_nav {
+  flex: 18;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid #000; */
+}
+div.main_ham {
+  flex: 1;
+  /* border: 1px solid green; */
+}
+div.main_nav ul {
+  /* border: 1px solid #000; */
+  list-style: none;
+  position: absolute;
+  height: 100%;
+  top: -100%;
+  transition: 0.4s;
+  /* display: flex !important; */
+  /* justify-content: center;
+  align-items: center; */
+}
+.main_nav_open {
+  top: 0 !important;
+}
+div.main_nav ul li {
+  margin: 23px 30px;
+  cursor: pointer;
+  padding-bottom: 5px;
+  display: inline-block;
+  transition: 0.5s;
+}
+div.main_nav ul li:hover {
+  border-bottom: 1px solid #000;
+}
+/* 햄버거 버튼 */
+input[id="main_ham_trigger"] {
+  display: none;
+}
+
+label[for="main_ham_trigger"] {
+  /* border: 1px solid red; */
+  z-index: 2;
+  width: 35px;
+  height: 23px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  margin: 23px auto;
+}
+
+label[for="main_ham_trigger"] span {
+  position: absolute;
+  height: 3px;
+  background-color: rgb(163, 163, 163);
+  width: 100%;
+  left: 0;
+  transition: 0.3s;
+}
+
+label[for="main_ham_trigger"] span:nth-child(1) {
+  top: 0;
+}
+label[for="main_ham_trigger"] span:nth-child(2) {
+  top: 50%;
+}
+label[for="main_ham_trigger"] span:nth-child(3) {
+  top: 100%;
+}
+
+input[id="main_ham_trigger"]:checked + label[for="main_ham_trigger"] span {
+  background-color: #e70b35;
+}
+
+input[id="main_ham_trigger"]:checked
+  + label[for="main_ham_trigger"]
+  span:nth-child(1) {
+  top: 50%;
+  transform: rotate(45deg);
+}
+input[id="main_ham_trigger"]:checked
+  + label[for="main_ham_trigger"]
+  span:nth-child(2) {
+  opacity: 0;
+}
+input[id="main_ham_trigger"]:checked
+  + label[for="main_ham_trigger"]
+  span:nth-child(3) {
+  top: 50%;
+  transform: rotate(-45deg);
+}
+
+/* 본문 */
+
+section {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 90%;
+  overflow: auto;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+article {
+  /* position: absolute; */
+  overflow: hidden;
+  width: 80%;
+  height: 80%;
+  /* border: 1px solid #000; */
+  /* background-color: #ffffff71; */
+  /* border-radius: 20px; */
+}
+
+section::-webkit-scrollbar {
+  display: none;
+}
+footer {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 2%;
+}
+footer p {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  font-style: italic;
+}
