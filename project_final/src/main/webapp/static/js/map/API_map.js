@@ -1,21 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
-  let makers = []; // 마커 리스트
-  let nowType = 0;
+  let makers = []; // 마커 리스트 (맵에 뿌려줄 마커 객체)
+  let publicPosition = []; // 마커 리스트 (API에서 가져온 Maker의 리스트)
+  let customOverlays = []; // 마커상단 제목DIV 리스트  (커스텀 오버레이)
+  const imageSrcList = [
+    `${rootPath}/static/image/icon/pin_1.png`,
+    `${rootPath}/static/image/icon/pin_1.png`,
+    `${rootPath}/static/image/icon/pin_2.png`,
+    `${rootPath}/static/image/icon/pin_3.png`,
+  ];
+  const imageSrc =
+    "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; // 마커이미지(안씀)
 
-  let customOverlays = []; // 커스텀 오버레이 리스트
+  /**
+   * 카카오맵 Marker 지우는 함수
+   */
   const markerClear = () => {
     makers.forEach((marker) => {
       marker.setMap(null);
     });
-    customOverlays.forEach((element) => {
-      element.setMap(null);
+    customOverlays.forEach((mkTitle) => {
+      mkTitle.setMap(null);
     });
   };
 
+  /**
+   * API에서 가져온 객체를 makers(카카오맵에서 사용할) 리스트에 세팅해서 집어넣기.
+   * @param {*} position  : API에서 가져온 publicPosition 의 단일 객체
+   * @param {*} makers  : 마커List - 마커를 집어넣을
+   */
   const markerSet = (position, makers) => {
-    var imageSize = new kakao.maps.Size(24, 35);
+    var imageSize = new kakao.maps.Size(30, 30);
     // 마커 이미지를 생성합니다
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+    var markerImage = new kakao.maps.MarkerImage(
+      imageSrcList[position.mk_type],
+      imageSize
+    );
     let markerPos = new kakao.maps.LatLng(position.mk_lati, position.mk_longi);
     // 마커를 생성합니다
     let marker = new kakao.maps.Marker({
@@ -34,37 +53,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     customOverlays.push(customOverlay);
-    kakao.maps.event.addListener(marker, "click", () => {
-      // 커스텀 오버레이를 전부 닫고
-      customOverlays.forEach((element) => {
-        element.setMap(null);
-      });
-      customOverlay.setMap(map);
-    });
+    kakao.maps.event.addListener(marker, "click", markerClickHandler);
   };
 
-  // var container = document.querySelector(".API_map");
-  // const nav_sns_all = document?.getElementById("nav_sns_all");
-  // const nav_sns_fes = document?.getElementById("nav_sns_fes");
-  // const nav_sns_travel = document?.getElementById("nav_sns_travel");
-  // const nav_sns_res = document?.getElementById("nav_sns_res");
+  const markerClickHandler = () => {
+    // 커스텀 오버레이(마커타이틀)를 전부 닫고
+    // 선택한 마커타이틀만 출력
+    customOverlays.forEach((mkTitle) => {
+      mkTitle.setMap(null);
+    });
+    customOverlay.setMap(map);
+  };
+
+  /**
+   * 맵상단 메뉴 호출시  markerSet을 호출하며
+   * 전체, 축제, 관광지, 식당
+   */
   const API_nav_container = document.querySelector(".API_nav_container");
-  let publicPosition = [];
   API_nav_container.addEventListener("click", (e) => {
     let markType = e.target;
 
-    console.table(publicPosition);
+    // console.table(publicPosition);
     if (e.target.tagName === "LI") {
       markerClear();
       if (markType.innerHTML == "전체") {
         publicPosition.forEach((pos) => {
           markerSet(pos, makers);
         });
-      }
-      // console.log(markType.innerHTML);
-      else if (markType.innerHTML == "축제") {
+      } else if (markType.innerHTML == "축제") {
         const result = publicPosition.filter((item, index) => {
-          console.log("item", item);
           return item.mk_type === 1;
         });
         result.forEach((pos) => {
@@ -72,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       } else if (markType.innerHTML == "관광지") {
         const result = publicPosition.filter((item, index) => {
-          console.log("item", item);
           return item.mk_type === 2;
         });
         result.forEach((pos) => {
@@ -80,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       } else if (markType.innerHTML == "식당") {
         const result = publicPosition.filter((item, index) => {
-          console.log("item", item);
+          // console.log("item", item);
           return item.mk_type === 3;
         });
         result.forEach((pos) => {
@@ -90,92 +106,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  /************************************************************************
+   * 아래부분은 호출시 바로 실행되는 부분. 순서 중요.
+   */
+
+  /**
+   * 맵을 출력할 DIV를 불러와 맵을 출력.
+   * 위도,경도,확대레벨을 설정해서 뿌려줌. ( 값은 DIV가 가지고 있음 : jsp 처리)
+   */
   let container = document?.querySelector(".API_map"); // 지도를 표시할 div
   let mapOption = {
     center: new kakao.maps.LatLng(
       container.dataset.lati,
       container.dataset.longi
     ), // 지도의 중심좌표
-    level: container.dataset.level,
-
-    // 지도의 확대 레벨
+    level: container.dataset.level, // 지도의 확대 레벨
   };
-  console.log(container.dataset.lati);
-  console.log(container.dataset.longi);
   // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
   let map = new kakao.maps.Map(container, mapOption);
 
-  /***************************************
-    마커 관련 부분 시작 
-  */
-  // fetch(`${rootPath}/mark_list?name=${container.dataset.name}`) // 요청
-  //   .then((response) => response.json()) // 응답한 데이터 중 JSON 만 추출
-  //   .then((result) => {
-  //     console.log(result);
-  //   });
-  var imageSrc =
-    "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
-  // let typeClickEvent = (e, i) => {
-  //   let markType = e.target;
-  //   if (e.target.tagName === "LI") {
-  //     // console.log(markType.innerHTML);
-  //     if (markType.innerHTML == "축제") {
-  //       nowType = 1;
-  //       i = -1;
-  //     }
-  //   }
-  // };
-
-  // API_nav_container.addEventListener("click", typeClickEvent);
-  // if (nowType == 0) {
-  //   console.log(positions[i].mk_type);
-  // } else if (positions[i].mk_type !== nowType) {
-  //   console.log(nowType);
-  //   continue;
-  // }
-
+  /**
+   * 화면을 호출할때 해당 지역의 makerList를 불러와
+   * publicPosition, makers을 세팅. (변수 설명은 상단변수 선언부 참조)
+   */
   fetch(`${rootPath}/map/mark_list?name=${container.dataset.name}`)
     .then((response) => response.json()) // response.json()은 응답 데이터를 JSON 개체로 변환하는 작업
     .then((positions) => {
-      console.log("전체위치", positions);
-      publicPosition = [...positions];
-
-      console.log("public", publicPosition);
+      publicPosition = [...positions]; // 깊은 복사
       positions.forEach((position) => {
         markerSet(position, makers);
       });
-      console.log(makers);
-
-      /*
-        API_nav_container.addEventListener("click", (e, i) => {
-          let markType = e.target;
-          if (e.target.tagName === "LI") {
-            // console.log(markType.innerHTML);
-            if (markType.innerHTML == "축제") {
-              console.log(markType);
-              nowType = 1;
-              i = -1;
-            }
-          }
-        });
-        // if (paramType == "0") {
-        //   console.log(paramType);
-        //   console.log(positions[i]);
-        // } else if (paramType != positions[i].type) {
-        //   console.log(paramType);
-        //   continue;
-        // }
-        // 마커 이미지의 이미지 크기 입니다
-        if (nowType === 0) {
-          console.log(positions[i].mk_type);
-          console.log("현재 type 은? {} ", nowType);
-        } else if (positions[i].mk_type !== nowType) {
-          console.log("현재 type 은? {} ", nowType);
-          console.log(positions[i].mk_type);
-          continue;
-        }
-        */
     });
 });
 
