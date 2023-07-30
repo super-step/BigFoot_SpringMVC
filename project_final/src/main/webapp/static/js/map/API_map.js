@@ -48,21 +48,73 @@ document.addEventListener("DOMContentLoaded", () => {
     // 마커에 표시할 커스텀 오버레이 생성.
     let customOverlay = new kakao.maps.CustomOverlay({
       position: markerPos,
-      content: `<div id="${position.mk_name}" class="marker"> <span class="title">${position.mk_name}</span> </div>`,
+      content: `<div id="${position.mk_seq}" class="marker"> <span class="title">${position.mk_name}</span> </div>`,
       yAnchor: 1,
     });
 
     customOverlays.push(customOverlay);
-    kakao.maps.event.addListener(marker, "click", markerClickHandler);
+    /**
+     * 마커 클릭 이벤트. (따로뜯을경우 매개변수들을 넣어줘야됨. 결론: 분리안함)
+     *    : 마커마다 click이벤트를 걸어주는게 가장 현실적인 방안.
+     *    : 마커set할때 이벤트를 다 걸어놓음
+     * 1. 마커위 타이틀출력 (오버레이)
+     * 2. 우측리스트박스 상단에 타이틀 출력
+     * 3. 이미지카드list를 우측리스트박스에 출력.
+     */
+    kakao.maps.event.addListener(marker, "click", () => {
+      setImgCardList();
+      // 1. 선택한 마커타이틀만 출력
+      customOverlays.forEach((mkTitle) => {
+        mkTitle.setMap(null);
+      });
+      customOverlay.setMap(map);
+      // 2. 리스트박스에 타이틀 출력
+      const side_right = document.querySelector(".side_right");
+      const listTitle = document.querySelector(
+        ".side_right .sns.listTitle label"
+      );
+      listTitle.textContent = position.mk_name;
+      side_right.setAttribute("data-mkseq", position.mk_seq);
+      // 3. 리스트박스에 이미지list 출력
+      fetch(`${rootPath}/posts/postlist/175`)
+        .then((response) => response.json()) // response.json()은 응답 데이터를 JSON 개체로 변환하는 작업
+        .then((jsonList) => {
+          console.log(jsonList);
+        });
+      // 이미지 카드 리스트 출력
+    });
   };
 
-  const markerClickHandler = () => {
-    // 커스텀 오버레이(마커타이틀)를 전부 닫고
-    // 선택한 마커타이틀만 출력
-    customOverlays.forEach((mkTitle) => {
-      mkTitle.setMap(null);
-    });
-    customOverlay.setMap(map);
+  /**
+   * 사이드에 div 세팅할
+   * 새글 입력 Form
+   */
+  const setInputForm = () => {
+    const sideRight = document.querySelector(".side_right"); // 객체추가삭제 대상.
+    const imgCardList = document.querySelector(".side_right .sns.imgCardList"); // del : 이미지리스트
+    const inputForm = document.querySelector(".sideInputForm form"); // add : 입력폼
+    if (imgCardList != null) {
+      sideRight.removeChild(imgCardList);
+      const copiedForm = inputForm.cloneNode(true); // 복사해서 appendChild
+      sideRight.appendChild(copiedForm);
+    }
+    let hiddenMkseq = document.querySelector(".side_right form #sp_mkseq");
+    hiddenMkseq.value = sideRight.dataset.mkseq; // mkseq 세팅
+    console.log(hiddenMkseq.value);
+  };
+  /**
+   * 사이드에 div 세팅할
+   * 글(이미지카드) 리스트 보이기 위한 템플릿(?)
+   */
+  const setImgCardList = () => {
+    const sideRight = document.querySelector(".side_right"); // 객체추가삭제 대상.
+    const inputForm = document.querySelector(".side_right form"); // del : 입력폼
+    const imgCardList = document.querySelector(".sideImgCard .sns.imgCardList"); // add : 이미지리스트
+    if (inputForm != null) {
+      sideRight.removeChild(inputForm);
+      const copiedImgCardList = imgCardList.cloneNode(true); // 복사해서 appendChild
+      sideRight.appendChild(copiedImgCardList);
+    }
   };
 
   /**
@@ -75,7 +127,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // console.table(publicPosition);
     if (e.target.tagName === "LI") {
-      markerClear();
+      if (markType.innerHTML == "글쓰기") {
+        setInputForm();
+      } else {
+        setImgCardList();
+        markerClear();
+      }
       if (markType.innerHTML == "전체") {
         publicPosition.forEach((pos) => {
           markerSet(pos, makers);

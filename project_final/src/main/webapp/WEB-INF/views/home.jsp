@@ -12,8 +12,9 @@
 <body>
 	<tiles:insertAttribute name="header" />
 	<section>
-	<tiles:insertAttribute name="main-content" />
+		<tiles:insertAttribute name="main-content" />
 	</section>
-<tiles:insertAttribute name="footer" />
+	<tiles:insertAttribute name="footer" />
 </body>
 </html>
+<tiles:insertAttribute name="await-content" />

@@ -42,6 +42,10 @@ header {
   height: 8%;
   /* border: 1px solid #000; */
 }
+.viewOff {
+  display: none;
+}
+
 /* 로고 */
 div.main_logo {
   flex: 1;

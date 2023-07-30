@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.toes.footprint.models.APIMarkDto;
+import com.toes.footprint.models.PostDto;
 import com.toes.footprint.models.SubDistDto;
 import com.toes.footprint.service.APIMarkService;
 import com.toes.footprint.service.SubDistService;
@@ -38,7 +40,8 @@ public class MapController {
 	}
 	
 	@RequestMapping(value = "/api" , method=RequestMethod.GET)
-	public String API_map(Model model, String name) {
+	public String API_map(Model model, String name,
+			@ModelAttribute("POSTDTO") PostDto postDto) {
 		SubDistDto dto = subDistService.findByCode(name);
 		model.addAttribute("SUBDIST", dto);
 		model.addAttribute("BODY", "API_MAP");
@@ -53,6 +56,9 @@ public class MapController {
 		return markList;
 	}
 	
-	
+	@ModelAttribute("POSTDTO")
+	public PostDto newPostDto() {
+		return PostDto.builder().build();
+	}
 	
 }
