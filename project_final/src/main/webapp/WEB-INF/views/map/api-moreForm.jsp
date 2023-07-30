@@ -13,10 +13,7 @@
 </div>
 
 <div class="sideInputForm viewOffs">
-	<form:form action="${rootPath}/posts/post/insert" modelAttribute="POSTDTO" method="POST">
-		<div>
-			<label>이미지 미리보기</label>
-		</div>
+	<form:form action="${rootPath}/posts/post/insert" modelAttribute="POSTDTO" method="POST" enctype="multipart/form-data">
 		<div>
 			<label>title</label>
 			<form:input path="sp_title" type="text" placeholder="제목을 입력하세요"/>
@@ -24,6 +21,12 @@
 		<div>
 			<label>contents</label>
 			<form:textarea path="sp_content" rows="2" cols="1" maxlength="55"></form:textarea>
+		</div>
+		<div>
+			<label>이미지 리스트</label>
+			<input name="b_images" type="file"  
+				multiple="multiple"
+				accept="image/*" />
 		</div>
 		<form:hidden path="sp_mkseq"/>
 		<div>

@@ -56,9 +56,5 @@ public class MapController {
 		return markList;
 	}
 	
-	@ModelAttribute("POSTDTO")
-	public PostDto newPostDto() {
-		return PostDto.builder().build();
-	}
 	
 }

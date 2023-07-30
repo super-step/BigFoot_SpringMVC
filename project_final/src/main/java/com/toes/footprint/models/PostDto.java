@@ -21,4 +21,5 @@ public class PostDto {
 	private String sp_mdate;//	VARCHAR(10)
 	private long sp_mkseq;//	BIGINT
 	private long sp_mbseq;//	BIGINT
+	
 }

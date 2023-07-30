@@ -1,5 +1,9 @@
 package com.toes.footprint.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.toes.footprint.models.PostDto;
 import com.toes.footprint.service.PostService;
@@ -51,8 +56,11 @@ public class PostController {
 	// 새글에 대한 데이터가 넘어오면 처리하는 부분.
 	@RequestMapping(value = "/post/insert", method = RequestMethod.POST)
 	public String insertPost(
-			@ModelAttribute("POSTDTO") PostDto postDto, Model model) {
+			@ModelAttribute("POSTDTO") PostDto postDto, 
+			MultipartHttpServletRequest b_images,
+			Model model) {
 		log.debug("@@@@@@@@ : {}", postDto.toString());
+		log.debug("imageList : {}", b_images);
 		return null;
 	}
 	
@@ -79,6 +87,23 @@ public class PostController {
 	
 	@ModelAttribute("POSTDTO")
 	public PostDto newPostDto() {
-		return PostDto.builder().build();
+		Date date = new Date(System.currentTimeMillis());
+		Calendar calendar = Calendar.getInstance();
+
+		// 현재날짜와 시간 getter 하기
+		LocalDateTime localDateTime = LocalDateTime.now();
+		
+		// 날짜를 문자열로 변환하기 위한 pattern 생성
+		DateTimeFormatter dateFormatter 
+			= DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		// 시간을 문자열로 변환하기 위한 pattern 생성
+		DateTimeFormatter timeFormatter
+			= DateTimeFormatter.ofPattern("HH:mm:ss");
+	
+		// 날짜 형식의 데이터를 문자열로 변환
+		String strDate = localDateTime.format(dateFormatter);
+		// 시간 형식의 데이터를 문자열로 변환
+		String strTime = localDateTime.format(timeFormatter);
+		return PostDto.builder().sp_cdate(strDate).build();
 	}
 }
