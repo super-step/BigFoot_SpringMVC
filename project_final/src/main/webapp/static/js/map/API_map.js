@@ -155,11 +155,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const sideRight = document.querySelector(".side_right"); // 객체추가삭제 대상.
     const imgCardList = document.querySelector(".side_right .sns.imgCardList"); // del : 이미지리스트
     const inputForm = document.querySelector(".sideInputForm form"); // add : 입력폼
+
+    if (sideRight.dataset.mkseq == null) {
+      alert("마커를 선택해 주세요.");
+      return;
+    }
+
     if (imgCardList != null) {
       sideRight.removeChild(imgCardList);
       const copiedForm = inputForm.cloneNode(true); // 복사해서 appendChild
       sideRight.appendChild(copiedForm);
     }
+
     let hiddenMkseq = document.querySelector(".side_right form #sp_mkseq");
     hiddenMkseq.value = sideRight.dataset.mkseq; // mkseq 세팅
     console.log(hiddenMkseq.value);
