@@ -25,4 +25,6 @@ public interface PostDao {
 //			+ "	WHERE b_seq = #{seq}")
 //	public PostDto findById(String sp_seq);
 	public int insert(PostDto postDto);
+
+	public List<PostDto> findByMbseq(long mb_seq);
 }

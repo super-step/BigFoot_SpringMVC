@@ -12,4 +12,6 @@ public interface PostService {
 
 	int insert(PostDto postDto, MultipartHttpServletRequest sp_images);
 
+	List<PostDto> findByMbseq(long mb_seq);
+
 }

@@ -39,6 +39,15 @@ public class PostServiceImplV1 implements PostService{
 	}
 	
 	@Override
+	public List<PostDto> findByMbseq(long mb_seq){
+		List<PostDto> postDtoList = postDao.findByMbseq(mb_seq);
+		for(PostDto postDto : postDtoList) {
+			postDto.setSp_imgs(fileDao.findByBSeq(postDto.getSp_seq()));
+		}
+		return postDtoList;
+	}
+	
+	@Override
 	public int insert(
 			PostDto postDto,
 			MultipartHttpServletRequest sp_images) {

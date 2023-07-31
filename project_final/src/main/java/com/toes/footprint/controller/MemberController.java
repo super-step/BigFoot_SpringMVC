@@ -1,5 +1,7 @@
 package com.toes.footprint.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.toes.footprint.models.MemberDto;
+import com.toes.footprint.models.PostDto;
 import com.toes.footprint.service.MemberService;
+import com.toes.footprint.service.PostService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,12 +24,12 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 
 	protected final MemberService memberService;
-
-	public MemberController(MemberService memberService) {
+	protected final PostService postService;
+	public MemberController(MemberService memberService, PostService postService) {
 		super();
 		this.memberService = memberService;
+		this.postService = postService;
 	}
-
 
 //	회원가입 페이지 GET
 
@@ -152,5 +156,19 @@ public class MemberController {
 //	public MemberDto newMember() {
 //		return MemberDto.builder().build();
 //	}
-
+	//----------------------------
+	
+	@RequestMapping(value = "/mySnsList", method = RequestMethod.GET)
+	public String mySnsList(
+			Model model, HttpSession httpSession
+			) {
+		// 1. 내 게시글 호출
+		List<PostDto> postDtoList = postService.findByMbseq(1);
+		// 2. 게시글의 이미지 호출.
+		log.debug("postDtoList 1234 : {}", postDtoList.toString());
+//		model.addAttribute("POSTLIST", postDtoList);
+		return "mySnsList";
+	}
+	
+	
 }

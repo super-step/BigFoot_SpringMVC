@@ -9,6 +9,10 @@
 		SELECT * FROM tb_snspost
 		WHERE sp_mkseq = #{sp_mkseq}
 	</select>
+	<select id="findByMbseq">
+		SELECT * FROM tb_snspost
+		WHERE sp_mbseq = #{sp_mbseq}
+	</select>
 	<select id="findById"></select>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="sp_seq"> 
 		INSERT INTO tb_snspost(
