@@ -10,8 +10,20 @@
 		WHERE sp_mkseq = #{sp_mkseq}
 	</select>
 	<select id="findById"></select>
-	<insert id="insert">
-	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="sp_seq"> 
+		INSERT INTO tb_snspost(
+			sp_title,
+			sp_content,
+			sp_cdate,
+			sp_mkseq,
+			sp_mbseq
+		) VALUES(
+			#{sp_title},
+			#{sp_content},
+			#{sp_cdate},
+			#{sp_mkseq},
+			#{sp_mbseq}
+		)
 	</insert>
 	<update id="update"></update>
 	<delete id="delete"></delete>

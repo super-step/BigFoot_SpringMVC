@@ -24,13 +24,17 @@
 		</div>
 		<div>
 			<label>이미지 리스트</label>
-			<input name="b_images" type="file"  
+			<input name="sp_images" type="file"  
 				multiple="multiple"
 				accept="image/*" />
 		</div>
 		<form:hidden path="sp_mkseq"/>
 		<div>
-			<button type="submit">UPLOAD</button>
+			<button type="button">UPLOAD</button>
 		</div>
 	</form:form>
+</div>
+
+<div class="mdetailMotal viewOff">
+	<div>디테일 모달창</div>
 </div>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- bbs-mapper.xml 과 dao.FileDao interface를 연동하겠다 -->
+<mapper namespace="com.toes.footprint.dao.FileDao">
+
+	<insert id="insert">
+		INSERT INTO tb_snsimg 
+		(spi_spseq, spi_originuri, spi_uploaduri, spi_cdate)
+		<foreach open="VALUES" collection="list" item="DTO" separator=",">
+			(#{spi_spseq}, #{DTO.spi_originuri}, #{DTO.spi_uploaduri}, #{DTO.spi_cdate})
+		</foreach>
+	</insert>	
+</mapper>

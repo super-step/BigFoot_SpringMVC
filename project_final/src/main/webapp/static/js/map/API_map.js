@@ -85,6 +85,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  const submitForm = () => {
+    const form = document.querySelector(".side_right form");
+    const formData = new FormData(form);
+
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          console.log("성공!");
+          const response = JSON.parse(xhr.responseText); // 서버로부터 받은 JSON 데이터 파싱
+          console.log(response.result);
+          // 성공하면 리스트폼을 셋팅해주고, 이미지카드 리스트를 로드한다.
+        } else {
+          console.error("오류 발생");
+        }
+      }
+    };
+
+    xhr.open("POST", form.action, true);
+    xhr.send(formData);
+  };
   /**
    * 사이드에 div 세팅할
    * 새글 입력 Form
@@ -101,6 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let hiddenMkseq = document.querySelector(".side_right form #sp_mkseq");
     hiddenMkseq.value = sideRight.dataset.mkseq; // mkseq 세팅
     console.log(hiddenMkseq.value);
+    const insertButton = document.querySelector(".side_right form button");
+    console.log(insertButton);
+    insertButton.addEventListener("click", submitForm);
   };
   /**
    * 사이드에 div 세팅할

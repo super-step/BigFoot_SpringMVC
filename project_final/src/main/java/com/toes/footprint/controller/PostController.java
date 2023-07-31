@@ -54,14 +54,18 @@ public class PostController {
 	// 그래서 메소드는 구현하지 않는다
 	
 	// 새글에 대한 데이터가 넘어오면 처리하는 부분.
+	@ResponseBody
 	@RequestMapping(value = "/post/insert", method = RequestMethod.POST)
 	public String insertPost(
 			@ModelAttribute("POSTDTO") PostDto postDto, 
-			MultipartHttpServletRequest b_images,
+			MultipartHttpServletRequest sp_images,
 			Model model) {
 		log.debug("@@@@@@@@ : {}", postDto.toString());
-		log.debug("imageList : {}", b_images);
-		return null;
+		log.debug("imageList : {}", sp_images);
+		postService.insert(postDto, sp_images);
+		
+		
+		return "{\"result\" : \"OK\"}";
 	}
 	
 	// 내 게시글을 변경할수 있어야 한다.

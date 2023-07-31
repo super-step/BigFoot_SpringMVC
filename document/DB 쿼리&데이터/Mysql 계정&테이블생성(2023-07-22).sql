@@ -59,8 +59,8 @@ sp_title	VARCHAR(30)	NOT NULL,
 sp_content	VARCHAR(400)	NOT NULL,	
 sp_cdate	VARCHAR(10)	NOT NULL,	
 sp_mdate	VARCHAR(10),
-sp_mkseq	BIGINT,		
-sp_mbseq	BIGINT		
+sp_mkseq	BIGINT	NOT NULL,		
+sp_mbseq	BIGINT	NOT NULL	
 );
 -- ALTER TABLE tb_snspost
 -- ADD FOREIGN KEY (sp_mkseq) REFERENCES tb_apimark(mk_seq);
@@ -68,12 +68,12 @@ sp_mbseq	BIGINT
 -- ADD FOREIGN KEY (sp_mbseq) REFERENCES tb_member(mb_seq);
 
 
-
 -- sns게시글이미지
 DROP TABLE IF EXISTS tb_snsimg;
 CREATE TABLE tb_snsimg(
 spi_seq	BIGINT	AUTO_INCREMENT	PRIMARY KEY,
-spi_uri	VARCHAR(100)	NOT NULL,	
+spi_originuri	VARCHAR(100)	NOT NULL,	
+spi_uploaduri	VARCHAR(100)	NOT NULL,	
 spi_cdate	VARCHAR(10)	NOT NULL,	
 spi_spseq	BIGINT	NOT NULL	
 );
