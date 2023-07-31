@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="default"
+		template="/WEB-INF/views/home.jsp">
+		<put-attribute name="head-main"
+			value="/WEB-INF/views/includes/default/include-head-main.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/includes/default/include-header.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/includes/default/include-footer.jsp" />
+		<put-attribute name="await-content" value="" />
+	</definition>
+	<definition name="home" extends="default">
+		<put-attribute name="head-sub"
+			value="/WEB-INF/views/includes/include-head-main-sub.jsp" />
+		<put-attribute name="main-content"
+			value="/WEB-INF/views/map/main.jsp" />
+	</definition>
+	<definition name="map/*" extends="default" >
+		<put-attribute name="head-sub"
+			value="/WEB-INF/views/includes/map/include-head-map-{1}.jsp" />
+		<put-attribute name="main-content"
+			value="/WEB-INF/views/map/{1}.jsp" />
+		<put-attribute name="await-content"
+			value="/WEB-INF/views/map/{1}-moreForm.jsp" />
+	</definition>
+
+</tiles-definitions>

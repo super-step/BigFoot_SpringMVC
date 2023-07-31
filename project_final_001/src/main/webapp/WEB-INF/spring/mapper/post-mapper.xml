@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.toes.footprint.dao.PostDao">
+
+	<select id="findByMkseq">
+		SELECT * FROM tb_snspost
+		WHERE sp_mkseq = #{sp_mkseq}
+	</select>
+	<select id="findById"></select>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="sp_seq"> 
+		INSERT INTO tb_snspost(
+			sp_title,
+			sp_content,
+			sp_cdate,
+			sp_mkseq,
+			sp_mbseq
+		) VALUES(
+			#{sp_title},
+			#{sp_content},
+			#{sp_cdate},
+			#{sp_mkseq},
+			#{sp_mbseq}
+		)
+	</insert>
+	<update id="update"></update>
+	<delete id="delete"></delete>
+
+</mapper> 

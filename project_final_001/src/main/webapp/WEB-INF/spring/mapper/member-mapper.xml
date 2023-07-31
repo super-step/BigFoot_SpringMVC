@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.toes.footprint.dao.MemberDao">
+
+
+	<insert id="insert">
+		INSERT INTO tb_member
+		(mb_id, mb_password, mb_nick,
+		mb_proimg, mb_name,
+		mb_birth, mb_tel, mb_email, mb_addr)
+		VALUES
+		(#{mb_id}, #{mb_password}, #{mb_nick}, #{mb_proimg},
+		#{mb_name},
+		#{mb_birth}, #{mb_tel}, #{mb_email}, #{mb_addr})
+	</insert>
+
+	<update id="update">
+		UPDATE tb_member
+		SET
+		mb_id = #{mb_id},
+		mb_password =
+		#{mb_password},
+		mb_nick = #{mb_nick},
+		mb_proimg = #{mb_proimg},
+		mb_name =
+		#{mb_name},
+		mb_birth = #{mb_birth},
+		mb_tel = #{mb_tel},
+		mb_email =
+		#{mb_email},
+		mb_addr = #{mb_addr}
+		WHERE mb_seq = #{mb_seq}
+	</update>
+
+
+
+
+	<select id="findByEmail">
+		SELECT *
+		FROM tb_member
+		WHERE mb_email = #{email}
+	</select>
+
+
+
+	<select id="creat_member_table">
+		CREATE TABLE IF NOT EXISTS tb_member(
+		mb_seq BIGINT
+		AUTO_INCREMENT PRIMARY KEY,
+		mb_id VARCHAR(30) NOT NULL,
+		mb_password
+		VARCHAR(100) NOT NULL,
+		mb_nick VARCHAR(10) NOT NULL,
+		mb_proimg
+		VARCHAR(100),
+		mb_name VARCHAR(20) NOT NULL,
+		mb_birth VARCHAR(10) NOT
+		NULL,
+		mb_tel VARCHAR(12) NOT NULL,
+		mb_email VARCHAR(40) NOT NULL,
+		mb_addr VARCHAR(200)
+		)
+
+
+	</select>
+
+
+
+
+
+
+</mapper>
