@@ -136,6 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const response = JSON.parse(xhr.responseText); // 서버로부터 받은 JSON 데이터 파싱
           console.log(response.result);
           // 성공하면 리스트폼을 셋팅해주고, 이미지카드 리스트를 로드한다.
+          setImgCardList();
+          selectImgCards();
         } else {
           console.error("오류 발생");
         }
