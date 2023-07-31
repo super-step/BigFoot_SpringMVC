@@ -76,15 +76,54 @@ document.addEventListener("DOMContentLoaded", () => {
       listTitle.textContent = position.mk_name;
       side_right.setAttribute("data-mkseq", position.mk_seq);
       // 3. 리스트박스에 이미지list 출력
-      fetch(`${rootPath}/posts/postlist/175`)
-        .then((response) => response.json()) // response.json()은 응답 데이터를 JSON 개체로 변환하는 작업
-        .then((jsonList) => {
-          console.log(jsonList);
-        });
-      // 이미지 카드 리스트 출력
+      selectImgCards();
     });
   };
 
+  /**
+   * right_side 에 CardList 를 출력할때 호출 할 메서드
+   */
+  const selectImgCards = () => {
+    let sideright_mkseq = document.querySelector(".side_right").dataset.mkseq;
+    fetch(`${rootPath}/posts/postlist/${sideright_mkseq}`)
+      .then((response) => response.json()) // response.json()은 응답 데이터를 JSON 개체로 변환하는 작업
+      .then((jsonList) => {
+        const imgCardList = document.querySelector(
+          ".side_right .sns.imgCardList"
+        );
+        const imgCardtemp = document.querySelector(
+          ".sideImgCard .sns.imgCardList .sns.imgCard"
+        );
+        console.log(jsonList);
+        console.log(imgCardtemp);
+        // 이미지카드 템플릿을 준비한다.
+        // list의 내용을 지운다.
+        imgCardList.innerHTML = "";
+        // 이미지카드를 반복하면서 생성(복사) 세팅한다.
+
+        jsonList.forEach((imgcard) => {
+          const copiedimgCardtemp = imgCardtemp.cloneNode(true);
+          let cardTitle = copiedimgCardtemp.querySelector(".card.text");
+          let imgTag = copiedimgCardtemp.querySelector("img");
+          let spanTag = copiedimgCardtemp.querySelector("span");
+
+          const mainImg = imgcard?.sp_imgs[0]?.spi_uploaduri;
+
+          imgTag.src = `${rootPath}/files/${mainImg}`;
+          cardTitle.innerHTML = imgcard.sp_title;
+          imgCardList.appendChild(copiedimgCardtemp);
+          // console.log(imgcard);
+          console.log(copiedimgCardtemp);
+        });
+
+        const copiedimgCardtemp = imgCardtemp.cloneNode(true);
+      });
+  };
+
+  /**
+   * form 의 POST submit을 javaScript에서 처리.
+   * button에 연결할 이벤트.
+   */
   const submitForm = () => {
     const form = document.querySelector(".side_right form");
     const formData = new FormData(form);

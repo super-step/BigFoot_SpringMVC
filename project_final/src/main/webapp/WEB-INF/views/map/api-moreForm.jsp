@@ -6,7 +6,10 @@
 <div class="sideImgCard viewOffs">
 	<div class="sns imgCardList">
 		<div class="sns imgCard">
-			<div class="card img">이미지</div>
+			<div class="card img">
+				<img src="${rootPath }/files/${FILE.i_uploadName}" width="100px" />
+				<span data-seq="${FILE.i_seq }" data-filename="${FILE.i_originalName }">&times;</span>
+			</div>
 			<div class="card text">요약된 내용</div>
 		</div>		
 	</div>

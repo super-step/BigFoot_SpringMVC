@@ -31,7 +31,11 @@ public class PostServiceImplV1 implements PostService{
 
 	@Override
 	public List<PostDto> findByMkseq(long mk_seq) {
-		return postDao.findByMkseq(mk_seq);
+		List<PostDto> postDtoList = postDao.findByMkseq(mk_seq);
+		for(PostDto postDto : postDtoList) {
+			postDto.setSp_imgs(fileDao.findByBSeq(postDto.getSp_seq()));
+		}
+		return postDtoList;
 	}
 	
 	@Override
@@ -60,7 +64,7 @@ public class PostServiceImplV1 implements PostService{
 			
 			if(sp_images.getFile("sp_images").getSize() > 0) {
 				List<FileDto> files = fileService.filesUp(sp_images);
-				log.debug(files.toString());
+//				log.debug(files.toString());
 				result = fileDao.insert(files, postDto.getSp_seq());
 			}
 			return result;

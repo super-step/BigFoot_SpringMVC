@@ -1,5 +1,7 @@
 package com.toes.footprint.models;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,5 +23,7 @@ public class PostDto {
 	private String sp_mdate;//	VARCHAR(10)
 	private long sp_mkseq;//	BIGINT
 	private long sp_mbseq;//	BIGINT
+	
+	private List<FileDto> sp_imgs;
 	
 }

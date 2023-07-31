@@ -20,6 +20,10 @@
   font-size: 14px;
   font-weight: bold;
 }
+.sns.imgCardList {
+  overflow: scroll;
+  background-color: aqua;
+}
 
 .right_list > .sns_box {
   border: 1px solid #007996;
