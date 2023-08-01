@@ -101,8 +101,8 @@ PRIMARY KEY(sh_spseq,sh_mbseq)
 DROP TABLE IF EXISTS tb_follow;
 CREATE TABLE tb_follow(
 fol_seq	BIGINT	AUTO_INCREMENT	PRIMARY KEY,
-followin	BIGINT	NOT NULL	NOT NULL,
-follower	BIGINT	NOT NULL	NOT NULL
+followin	BIGINT	NOT NULL,
+follower	BIGINT	NOT NULL
 );
 
 -- ALTER TABLE tb_follow
