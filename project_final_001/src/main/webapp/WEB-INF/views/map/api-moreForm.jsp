@@ -29,8 +29,9 @@
 			<form:textarea path="sp_content" rows="2" cols="1" maxlength="55"></form:textarea>
 		</div>
 		<div id="inputImageBox">
+			<label>이미지미리보기</label><div id="image_container"></div>
 			<label>이미지 첨부</label> <input name="sp_images" type="file"
-				multiple="multiple" accept="image/*" />
+				multiple="multiple" onchange="setThumbnail(event);" accept="image/*" />
 		</div>
 		<form:hidden path="sp_mkseq" />
 		<div id="inputFormBtn">
@@ -41,12 +42,14 @@
 
 <div class="sideDetail viewOff">
 	<div class="sns detail">
-		<div class="detail img">
-			<img src="${rootPath }/static/image/image/img_book_none.png" width="100px" />
-			<span data-seq="0000"
-				data-filename="0000"></span>
-		</div>
 		<div class="detail title">제목</div>
+		<div class="detail imgList">
+			<div class="detail img">
+				<img src="${rootPath }/static/image/image/img_book_none.png" width="100px" />
+				<span data-seq="0000"
+					data-filename="0000"></span>
+			</div>
+		</div>
 		<div class="detail text">내용</div>
 	</div>
 </div>

@@ -94,13 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const imgCardtemp = document.querySelector(
           ".sideImgCard .sns.imgCardList .sns.imgCard"
         );
-        console.log(jsonList);
-        console.log(imgCardtemp);
-        // 이미지카드 템플릿을 준비한다.
-        // list의 내용을 지운다.
-        imgCardList.innerHTML = "";
-        // 이미지카드를 반복하면서 생성(복사) 세팅한다.
 
+        imgCardList.innerHTML = "";
         jsonList.forEach((imgcard) => {
           const copiedimgCardtemp = imgCardtemp.cloneNode(true);
           let cardTitle = copiedimgCardtemp.querySelector(".card.text");
@@ -115,17 +110,67 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           cardTitle.innerHTML = imgcard.sp_title;
           imgCardList.appendChild(copiedimgCardtemp);
-          // console.log(imgcard);
-          // console.log(copiedimgCardtemp);
+
+          /**
+           * imgCard를 클릭했을때 Detail을 보여줘야 한다.
+           * click Event 추가
+           */
           copiedimgCardtemp.addEventListener("click", () => {
-            console.log(imgcard?.sp_seq);
+            // console.log(imgcard?.sp_imgs);
+            // imgcard?.sp_imgs.forEach((spimg) => {
+            //   console.log(spimg.spi_uploaduri);
+            // });
+            setDetailtmp(); // 우측사이드바 detail 템플릿으로 초기화
+            joinDetail(imgcard); // detail에 imgcard를 담아보내서 데이터 세팅
           });
         });
-
-        const copiedimgCardtemp = imgCardtemp.cloneNode(true);
       });
   };
-
+  /**
+   * 초기화된 Detail 템플릿에 이미지,값 들을 셋팅(join)한다.
+   * @param {*} imgcard : json으로 가져온 list중 클릭한 객체의 데이터
+   */
+  const joinDetail = (imgcard) => {
+    console.log(imgcard);
+    const detailTitle = document.querySelector(
+      ".side_right .sns.detail .detail.title"
+    );
+    const detailText = document.querySelector(
+      ".side_right .sns.detail .detail.text"
+    );
+    const detailImg = document.querySelector(
+      ".side_right .sns.detail .detail.imgList"
+    );
+    const imgTagTmp = document.querySelector(
+      ".sideDetail .sns.detail .detail.imgList .detail.img"
+    );
+    detailTitle.textContent = imgcard.sp_title;
+    detailText.textContent = imgcard.sp_content;
+    detailImg.innerHTML = ""; //img 초기화
+    imgcard?.sp_imgs.forEach((spimg) => {
+      let copiedImgTagTmp = imgTagTmp.cloneNode(true);
+      copiedImgTagTmp.querySelector(
+        "img"
+      ).src = `${rootPath}/files/${spimg.spi_uploaduri}`;
+      detailImg.appendChild(copiedImgTagTmp);
+    });
+  };
+  /**
+   * 사이드에 div 세팅할
+   * 글(이미지카드) Detail 템플릿(?)
+   */
+  const setDetailtmp = () => {
+    const sideRight = document.querySelector(".side_right"); // 객체추가삭제 대상.
+    const inputForm = document.querySelector(".side_right form"); // del : 입력폼
+    const detailtmp = document.querySelector(".sideDetail .sns.detail"); // add : detail tmp
+    const imgCardList = document.querySelector(".side_right .sns.imgCardList"); // del : 이미지리스트
+    if (document.querySelector(".side_right .sns.detail") == null) {
+      inputForm?.remove();
+      imgCardList?.remove();
+      const copiedDetailtmp = detailtmp.cloneNode(true); // 복사해서 appendChild
+      sideRight.appendChild(copiedDetailtmp);
+    }
+  };
   /**
    * form 의 POST submit을 javaScript에서 처리.
    * button에 연결할 이벤트.
@@ -173,10 +218,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     let hiddenMkseq = document.querySelector(".side_right form #sp_mkseq");
     hiddenMkseq.value = sideRight.dataset.mkseq; // mkseq 세팅
-    console.log(hiddenMkseq.value);
+
     const insertButton = document.querySelector(".side_right form button");
-    console.log(insertButton);
-    insertButton.addEventListener("click", submitForm);
+    const sp_images = document.querySelector(
+      ".side_right form #inputImageBox input[name='sp_images']"
+    );
+    sp_images.addEventListener("change", setThumbnail); // 미리보기 이벤트 add
+    insertButton.addEventListener("click", submitForm); // form commit이벤트 add
   };
   /**
    * 사이드에 div 세팅할
@@ -241,6 +289,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  const setThumbnail = (event) => {
+    for (var image of event.target.files) {
+      var reader = new FileReader();
+
+      reader.onload = function (event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        img.setAttribute("class", "preimg");
+        document.querySelector("div#image_container").appendChild(img);
+      };
+
+      console.log(image);
+      reader.readAsDataURL(image);
+    }
+  };
   /************************************************************************
    * 아래부분은 호출시 바로 실행되는 부분. 순서 중요.
    */
@@ -273,103 +336,3 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 });
-
-// const res = await fetch(`${rootPath}/mark_list?name=${container.dataset.name}`);
-// const positions = await res.json();
-// console.log(positions);
-
-// // 마커 좌표 데이터 로드
-// let positions;
-
-// if (paramName == "gj") {
-//   positions = JSON.parse(JSON.stringify(TestFile)).gj;
-// } else if (paramName == "Yeosu") {
-//   positions = JSON.parse(JSON.stringify(TestFile)).Yeosu;
-// }
-// console.log(positions);
-// 마커 이미지의 이미지 주소입니다
-
-// let customOverlays = []; // 커스텀 오버레이 리스트
-// for (var i = 0; i < positions.length; i++) {
-
-//   // 마커 이미지의 이미지 크기 입니다
-//   var imageSize = new kakao.maps.Size(24, 35);
-//   // 마커 이미지를 생성합니다
-//   var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-//   let position = new kakao.maps.LatLng(
-//     positions[i].Latitude,
-//     positions[i].longitude
-//   );
-//   // 마커를 생성합니다
-//   let marker = new kakao.maps.Marker({
-//     map: map, // 마커를 표시할 지도
-//     position: position, // 마커를 표시할 위치
-//     image: markerImage, // 마커 이미지
-//     title: positions[i].name,
-//     clickable: true,
-//   });
-//   makers.push(marker);
-
-// // 마커에 표시할 커스텀 오버레이 생성.
-// let customOverlay = new kakao.maps.CustomOverlay({
-//   position: position,
-//   content: `<div id="${positions[i].name}" class="marker"> <span class="title">${positions[i].name}</span> </div>`,
-//   yAnchor: 1,
-// });
-// customOverlays.push(customOverlay);
-
-// // 마커 클릭 이벤트
-// kakao.maps.event.addListener(marker, "click", () => {
-//   // 커스텀 오버레이를 전부 닫고
-//   customOverlays.forEach((element) => {
-//     element.setMap(null);
-//   });
-//   // Todo : 선택한 마커의 글 리스트를 보여주는 부분을 추가해줘야 됨.
-//   const sideCon = document.querySelector(".side_right");
-//   const sideList = document.querySelector(".right_list");
-//   const titleLable = document.querySelector(".titleLable");
-//   // 리스트의 내용 전부 지우기
-//   if (sideCon.firstChild) {
-//     sideCon.removeChild(sideCon.firstChild);
-//   }
-//   // while (sideList.firstChild) {
-//   //   sideList.removeChild(sideList.firstChild);
-//   // }
-
-//   // 글 리스트 불러와서 세팅
-//   let totalHTML = "";
-//   snsCotents.forEach((element) => {
-//     console.log(element.mName);
-//     console.log(marker.getTitle());
-//     if (element.mName == marker.getTitle()) {
-//       const snsboxString = `<div class="sns_box">
-//       <div class="sns_img">
-//       <img class="img" src="${element.img}" alt="" />
-//       </div>
-//       <div class="sns_title"><h2>${element.title}</h2></div>
-//       </div>`;
-//       totalHTML = totalHTML + snsboxString;
-//     }
-//   });
-//   let totalHTML = sideList.innerHTML;
-//   const snsboxString = `<div class="sns_box">
-//   <div class="sns_img">
-//     <img class="img" src="${snsCotents[0].img}" alt="" />
-//   </div>
-//   <div class="sns_title"><h2>${snsCotents[0].title}</h2></div>
-// </div>`;
-//   totalHTML = totalHTML + snsboxString;
-//   console.log(snsboxString);
-//   sideList.innerHTML = totalHTML;
-
-//   titleLable.textContent = marker.getTitle();
-//   sideList.appendChild(titleLable);
-//   sideList.classList.add("right_showit");
-//   sideCon.appendChild(sideList);
-//   // 선택한 오버레이를 열어준다.
-//   customOverlay.setMap(map);
-// });
-// }
-/*
-//   마커 관련 부분 끝
-// *****************************************/

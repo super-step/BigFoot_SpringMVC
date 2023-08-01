@@ -93,3 +93,8 @@ div#inputFormBtn button {
   padding: 10px 15px;
   border: none;
 }
+
+.preimg {
+  width: 20px;
+  height: 20px;
+}
